@@ -9,3 +9,4 @@ git pull --depth=2 origin master
 cd $cwd
 nvidia-docker build --rm=true -t emsi/deep-learning .
 nvidia-docker build -f Dockerfile-py3 --rm=true -t emsi/deep-learning:gpu-py3 .
+nvidia-docker build -f Dockerfile-py3-TF-1.2 --no-cache --rm=true -t emsi/deep-learning:gpu-py3-TF-1.2 .
