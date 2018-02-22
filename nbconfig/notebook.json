@@ -1,0 +1,24 @@
+{
+  "load_extensions": {
+    "code_prettify/code_prettify": true,
+    "zenmode/main": false,
+    "notify/notify": true,
+    "ruler/main": true,
+    "toggle_all_line_numbers/main": true,
+    "nbextensions_configurator/config_menu/main": true,
+    "scratchpad/main": true,
+    "varInspector/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "export_embedded/main": true,
+    "exercise/main": false,
+    "runtools/main": true,
+    "codefolding/main": true,
+    "code_prettify/autopep8": true
+  },
+  "autopep8": {
+    "hotkeys": {
+      "process_selected": "ctrl-shift-a",
+      "process_all": "esc,ctrl-shift-a"
+    }
+  }
+}
