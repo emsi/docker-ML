@@ -1,0 +1,52 @@
+FROM nvidia/cuda:9.0-devel
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	git \
+	wget \
+	vim \
+	inetutils-ping \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+
+# Install miniconda instead
+RUN wget --no-check-certificate https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+	bash ./Miniconda3-latest-Linux-x86_64.sh -b -p /anaconda3 && \
+	rm -f ./Miniconda3-latest-Linux-x86_64.sh
+
+ENV PATH /anaconda3/bin:$PATH
+RUN conda upgrade conda && \
+	conda upgrade --all && \
+	conda upgrade conda  && \
+	conda install nb_conda jupyter notebook
+
+# Create py3 TF environment s
+RUN conda install numpy matplotlib scikit-learn pytorch torchvision cuda90 -y -c pytorch
+RUN conda install -y -c menpo opencv3
+# need to patch https://github.com/conda/conda/pull/6867/commits/33b5307ec29b8aeb78086e6e75e4df9e3821f4fb
+RUN wget --no-check-certificate https://github.com/conda/conda/pull/6867/commits/33b5307ec29b8aeb78086e6e75e4df9e3821f4fb.diff
+RUN cd /anaconda3/lib/python3.6/site-packages && patch -p1 < /33b5307ec29b8aeb78086e6e75e4df9e3821f4fb.diff  
+RUN cd /anaconda3/pkgs/conda-4.4.10-py36_0/lib/python3.6/site-packages && patch -p1 < /33b5307ec29b8aeb78086e6e75e4df9e3821f4fb.diff
+RUN conda install -c anaconda pip
+RUN pip install scikit-umfpack
+RUN pip install cupy
+RUN pip install pynvrtc
+
+RUN mkdir /notebooks
+
+# Add image stylization dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends libgtk2.0-0 && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
+
+
+# patch the pynvcrtc
+RUN cd /anaconda3/lib/python3.6/site-packages/pynvrtc/ && \
+	wget  --no-check-certificate https://github.com/NVIDIA/pynvrtc/commit/6417a2896ff8a99f2c4d4195de657671a77c89a0.diff && \
+	patch < ./6417a2896ff8a99f2c4d4195de657671a77c89a0.diff
+
+
+# Set shell to bash
+ENV SHELL /bin/bash
+
