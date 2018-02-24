@@ -34,11 +34,7 @@ RUN pip install cupy
 RUN pip install pynvrtc
 
 RUN mkdir /notebooks
-#COPY Keras-examples/examples /notebooks/Keras-examples
-#COPY nbconfig /root/.jupyter/
 
 # Set shell to bash
 ENV SHELL /bin/bash
 
-#WORKDIR /notebooks
-#CMD ["/run_jupyter.sh"]
