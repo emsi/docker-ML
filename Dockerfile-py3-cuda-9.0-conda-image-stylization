@@ -35,6 +35,18 @@ RUN pip install pynvrtc
 
 RUN mkdir /notebooks
 
+# Add image stylization dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends libgtk2.0-0 && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
+
+
+# patch the pynvcrtc
+RUN cd /anaconda3/lib/python3.6/site-packages/pynvrtc/ && \
+	wget  --no-check-certificate https://github.com/NVIDIA/pynvrtc/commit/6417a2896ff8a99f2c4d4195de657671a77c89a0.diff && \
+	patch < ./6417a2896ff8a99f2c4d4195de657671a77c89a0.diff
+
+
 # Set shell to bash
 ENV SHELL /bin/bash
 
