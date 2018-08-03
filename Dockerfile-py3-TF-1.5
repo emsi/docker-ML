@@ -23,5 +23,10 @@ COPY nbconfig /root/.jupyter/
 # Set shell to bash
 ENV SHELL /bin/bash
 
+# Set locale
+ENV LANG "C.UTF-8"
+ENV LC_COLLATE "C.UTF-8"
+
+
 #WORKDIR /notebooks
 #CMD ["/run_jupyter.sh"]
