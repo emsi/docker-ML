@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.10.0-gpu-py3 
+FROM tensorflow/tensorflow:1.12.0-gpu-py3 
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	git \
@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip --no-cache-dir install scikit-learn nltk openpyxl seaborn pandas gensim imbalanced-learn Keras h5py Keras many_stop_words regex folium bokeh branca xlrd fiona tqdm autopep8 https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master jupyter_nbextensions_configurator pydot tables flask_restful statsmodels
+RUN pip3 --no-cache-dir install scikit-learn nltk openpyxl seaborn pandas gensim imbalanced-learn Keras h5py Keras many_stop_words regex folium bokeh branca xlrd fiona tqdm autopep8 https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master jupyter_nbextensions_configurator pydot tables flask_restful statsmodels torch torchvision
 
 RUN jupyter contrib nbextension install --user --skip-running-check && jupyter nbextensions_configurator enable --user 
 
