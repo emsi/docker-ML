@@ -24,8 +24,8 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash && \
 
 RUN jupyter contrib nbextension install --user --skip-running-check && jupyter nbextensions_configurator enable --user 
 
-RUN jupyter labextension install @krassowski/jupyterlab_go_to_definition @ryantam626/jupyterlab_code_formatter && \
-	 pip install jupyterlab_code_formatter && jupyter serverextension enable --py jupyterlab_code_formatter
+#RUN jupyter labextension install @krassowski/jupyterlab_go_to_definition @ryantam626/jupyterlab_code_formatter && \
+#	 pip install jupyterlab_code_formatter && jupyter serverextension enable --py jupyterlab_code_formatter
 
 
 RUN mkdir -p /notebooks/
