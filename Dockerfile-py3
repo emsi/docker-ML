@@ -1,4 +1,5 @@
-FROM tensorflow/tensorflow:1.12.0-gpu-py3 
+ARG TF_VERSION
+FROM tensorflow/tensorflow:$TF_VERSION
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	git \
@@ -9,16 +10,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip3 --no-cache-dir install scikit-learn nltk openpyxl seaborn pandas gensim imbalanced-learn Keras h5py Keras many_stop_words regex folium bokeh branca xlrd fiona tqdm autopep8 https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tarball/master jupyter_nbextensions_configurator pydot tables flask_restful statsmodels torch torchvision
+RUN pip3 --no-cache-dir install scikit-learn nltk openpyxl seaborn pandas gensim imbalanced-learn h5py many_stop_words regex folium bokeh branca xlrd fiona tqdm autopep8 pydot tables statsmodels Pillow torch torchvision jupyterlab black isort jupyter_contrib_nbextensions jupyter_nbextensions_configurator
+
+# Installing nodejs with npm
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash && \
+	apt-get install -y nodejs && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
+
+#RUN apt-get update && apt-get install -y npm && \
+#     apt-get clean && \
+#    rm -rf /var/lib/apt/lists/*
 
 RUN jupyter contrib nbextension install --user --skip-running-check && jupyter nbextensions_configurator enable --user 
 
+RUN jupyter labextension install @krassowski/jupyterlab_go_to_definition @ryantam626/jupyterlab_code_formatter && \
+	 pip install jupyterlab_code_formatter && jupyter serverextension enable --py jupyterlab_code_formatter
 
-RUN mkdir -p /notebooks/TF-examples && \
-	mv /notebooks/*.ipynb /notebooks/TF-examples 
-RUN mkdir -p /notebooks/Keras-examples
-#COPY Keras-examples/examples /notebooks/Keras-examples
-COPY nbconfig /root/.jupyter/
+
+RUN mkdir -p /notebooks/
+COPY nbconfig /notebooks/.jupyter/
+ENV HOME /notebooks
+WORKDIR /notebooks
 
 # Set shell to bash
 ENV SHELL /bin/bash
@@ -28,5 +41,4 @@ ENV LANG "C.UTF-8"
 ENV LC_COLLATE "C.UTF-8"
 
 
-#WORKDIR /notebooks
 #CMD ["/run_jupyter.sh"]
