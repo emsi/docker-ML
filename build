@@ -1,21 +1,5 @@
 #!/bin/bash
-cwd=$(pwd)
-cd Keras-examples/ && \
-	git init && \
-	git remote add origin -f https://github.com/fchollet/keras && \
-	git config core.sparsecheckout true && \
-	echo "examples/*" >> .git/info/sparse-checkout && \
-	git pull --depth=2 origin master
-cd $cwd
-
-mkdir -p tensorflow
-cd tensorflow
-git init && \
-	git remote add origin -f https://github.com/emsi/tensorflow && \
-	git config core.sparsecheckout true && \
-	echo "tensorflow/tools/docker/*" >> .git/info/sparse-checkout && \
-	echo "tensorflow/tools/ci_build/*" >> .git/info/sparse-checkout && \
-	git pull --depth=2 origin master
-cd $cwd
-
-nvidia-docker build -f Dockerfile-py3       --rm=true -t emsi/deep-learning:gpu-py3 .
+TF_VERSION="1.14.0-gpu-py3"
+docker build -f Dockerfile-py3 \
+	--build-arg TF_VERSION=${TF_VERSION} \
+	--rm=true -t emsi/deep-learning:${TF_VERSION} .
