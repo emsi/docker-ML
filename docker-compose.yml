@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  deep-learning:
+    image: emsi/deep-learning:${TF_VERSION}
+    container_name: dl-${TF_VERSION}
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "8888"
+    ports:
+    # jupyter
+    - target: 8888
+      published: 8888
+      protocol: tcp
+  deep-learning-devel:
+    image: emsi/deep-learning-devel:${TF_VERSION}
+    container_name: dl-devel-${TF_VERSION}
+    build: 
+      context: .
+      dockerfile: Dockerfile-devel
+    expose:
+      - "22"
+      - "8888"
+    ports:
+    # ssh
+    - target: 22
+      published: 3322
+      protocol: tcp
+      mode: host
+    volumes:
+      - ${HOME}:${HOME}
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
