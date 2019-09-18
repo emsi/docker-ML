@@ -21,5 +21,4 @@ EXPOSE 22
 RUN echo "export LANG=C.UTF-8" >> /etc/profile &&\
     echo "export LC_COLLATE=C.UTF-8" >> /etc/profile && \
     true
-WORKDIR /Fasshonfainda
 CMD ["/usr/sbin/sshd", "-D", "-e"]
