@@ -4,7 +4,6 @@ services:
   deep-learning:
     runtime: nvidia
     image: emsi/deep-learning:${TF_VERSION}
-    container_name: dl-${TF_VERSION}
     build: 
       context: .
       dockerfile: Dockerfile
@@ -18,7 +17,6 @@ services:
             - ${HOME}:/notebooks/
   deep-learning-devel:
     image: emsi/deep-learning-devel:${TF_VERSION}
-    container_name: dl-devel-${TF_VERSION}
     build: 
       context: .
       dockerfile: Dockerfile-devel
