@@ -1,7 +1,8 @@
-version: '3.7'
+version: '2.4'
 
 services:
   deep-learning:
+    runtime: nvidia
     image: emsi/deep-learning:${TF_VERSION}
     container_name: dl-${TF_VERSION}
     build: 
@@ -11,9 +12,10 @@ services:
       - "8888"
     ports:
     # jupyter
-    - target: 8888
-      published: 8888
-      protocol: tcp
+      - "8888:8888"
+    entrypoint: jupyter-lab --ip=0.0.0.0 --allow-root
+    volumes:
+            - ${HOME}:/notebooks/
   deep-learning-devel:
     image: emsi/deep-learning-devel:${TF_VERSION}
     container_name: dl-devel-${TF_VERSION}
@@ -23,12 +25,13 @@ services:
     expose:
       - "22"
       - "8888"
-    ports:
     # ssh
-    - target: 22
-      published: 3322
-      protocol: tcp
-      mode: host
+    ports:
+      - "22:3322"
+        #    - target: 22
+        #      published: 3322
+        #      protocol: tcp
+        #      mode: host
     volumes:
       - ${HOME}:${HOME}
       - /etc/passwd:/etc/passwd:ro
