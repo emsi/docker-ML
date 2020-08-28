@@ -1,6 +1,7 @@
-ARG TF_VERSION
-FROM tensorflow/tensorflow:$TF_VERSION
+ARG PY_VERSION
+FROM python:${PY_VERSION}
 
+ARG TF_VERSION
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	git \
 	wget \
@@ -10,7 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip3 --no-cache-dir install scikit-learn nltk openpyxl seaborn pandas gensim imbalanced-learn h5py many_stop_words regex folium bokeh branca xlrd fiona tqdm autopep8 pydot tables statsmodels Pillow torch torchvision jupyterlab black isort jupyter_contrib_nbextensions jupyter_nbextensions_configurator
+COPY requirements.txt /requirements.txt
+RUN pip3 --no-cache-dir install tensorflow==${TF_VERSION} -r requirements.txt
 
 # Installing nodejs with npm
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash && \

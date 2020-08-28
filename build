@@ -1,12 +1,17 @@
 #!/bin/bash
-#export TF_VERSION="1.14.0-gpu-py3"
-#docker-compose build --build-arg TF_VERSION=${TF_VERSION}
+export PY_VERSION="3.8"
 
-export TF_VERSION="1.15.0-gpu-py3"
-docker-compose build --build-arg TF_VERSION=${TF_VERSION}
+export TF_VERSION="2.3.0"
+docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 
-export TF_VERSION="1.15.0-py3"
-docker-compose build --build-arg TF_VERSION=${TF_VERSION}
+export TF_VERSION="2.2.0"
+docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 
-export TF_VERSION="2.0.0-gpu-py3"
-docker-compose build --build-arg TF_VERSION=${TF_VERSION}
+
+export PY_VERSION="3.7"
+
+export TF_VERSION="2.3.0"
+docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
+
+export TF_VERSION="2.2.0"
+docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}

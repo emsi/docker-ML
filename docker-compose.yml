@@ -3,7 +3,7 @@ version: '2.4'
 services:
   dl:
     runtime: nvidia
-    image: emsi/deep-learning:${TF_VERSION}
+    image: emsi/deep-learning:${TF_VERSION}-py${PY_VERSION}
     build: 
       context: .
       dockerfile: Dockerfile
@@ -20,7 +20,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ${HOME}:/notebooks/
   dl-devel:
-    image: emsi/deep-learning-devel:${TF_VERSION}
+    depends_on: 
+      - dl
+    image: emsi/deep-learning-devel:${TF_VERSION}-py${PY_VERSION}
     build: 
       context: .
       dockerfile: Dockerfile-devel
