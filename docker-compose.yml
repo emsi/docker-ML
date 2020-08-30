@@ -15,6 +15,7 @@ services:
     environment:
       - VIRTUAL_HOST=${COMPOSE_PROJECT_NAME}_dl
       - VIRTUAL_PORT=8888
+      - NVIDIA_VISIBLE_DEVICES=all
     entrypoint: jupyter-lab --ip=0.0.0.0 --allow-root
     volumes:
       - /etc/localtime:/etc/localtime:ro
