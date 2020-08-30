@@ -3,7 +3,7 @@ version: '2.4'
 services:
   dl:
     runtime: nvidia
-    image: emsi/deep-learning:${TF_VERSION}
+    image: emsi/deep-learning:${TF_VERSION}-py${PY_VERSION}
     build: 
       context: .
       dockerfile: Dockerfile
@@ -15,12 +15,15 @@ services:
     environment:
       - VIRTUAL_HOST=${COMPOSE_PROJECT_NAME}_dl
       - VIRTUAL_PORT=8888
+      - NVIDIA_VISIBLE_DEVICES=all
     entrypoint: jupyter-lab --ip=0.0.0.0 --allow-root
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${HOME}:/notebooks/
   dl-devel:
-    image: emsi/deep-learning-devel:${TF_VERSION}
+    depends_on: 
+      - dl
+    image: emsi/deep-learning-devel:${TF_VERSION}-py${PY_VERSION}
     build: 
       context: .
       dockerfile: Dockerfile-devel

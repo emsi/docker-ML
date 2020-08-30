@@ -1,5 +1,6 @@
 ARG TF_VERSION
-FROM emsi/deep-learning:$TF_VERSION
+ARG PY_VERSION
+FROM emsi/deep-learning:${TF_VERSION}-py${PY_VERSION}
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         openssh-server \
