@@ -1,3 +1,4 @@
+
 Jinja2
 Pillow
 PyYAML
@@ -8,6 +9,7 @@ black
 bokeh
 branca
 fiona
+flake8
 folium
 gensim
 h5py
@@ -17,11 +19,15 @@ ipython-genutils
 ipywidgets
 isort
 joblib
+jupyter-lsp
 jupyter-nbextensions-configurator
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
 jupyterlab
+jupyterlab_code_formatter
+jupytext
 many_stop_words
+mccabe
 nbconvert
 nbformat
 nltk
@@ -40,15 +46,22 @@ ptyprocess
 pycodestyle
 pycparser
 pycrypto
+pydocstyle
 pydot
+pyflakes
+pylint
+pyls-black
+python-language-server
 pytz
 pyzmq
 regex
 requests
+rope
 s3transfer
 scikit-learn
 scipy
 seaborn
+setuptools
 six
 smart-open
 statsmodels
@@ -69,4 +82,5 @@ webencodings
 widgetsnbextension
 wrapt
 xlrd
+yapf
 zipp
