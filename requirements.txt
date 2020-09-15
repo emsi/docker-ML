@@ -81,6 +81,7 @@ urllib3
 webencodings
 widgetsnbextension
 wrapt
+xgboost
 xlrd
 yapf
 zipp
