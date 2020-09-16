@@ -65,6 +65,7 @@ setuptools
 six
 smart-open
 statsmodels
+swifter
 tables
 tensorboard
 tensorflow-estimator
