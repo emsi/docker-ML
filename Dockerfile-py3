@@ -32,7 +32,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash && \
 RUN jupyter labextension install @jupyterlab/toc \
 	@aquirdturtle/collapsible_headings \
 	@ryantam626/jupyterlab_code_formatter \
-	@jupyter-widgets/jupyterlab-manager
+	@jupyter-widgets/jupyterlab-manager \
 	@krassowski/jupyterlab-lsp && \
 	jupyter serverextension enable --py jupyterlab_code_formatter 
 
