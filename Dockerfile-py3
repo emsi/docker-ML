@@ -39,6 +39,10 @@ RUN jupyter labextension install @jupyterlab/toc \
 
 #RUN jupyter lab build
 
+# add CUDA toolkit
+RUN curl -sL https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda_11.4.0_470.42.01_linux.run -o cuda_linux.run
+RUN sh ./cuda_linux.run --silent --toolkit && rm ./cuda_linux.run
+
 RUN mkdir -p /notebooks/
 COPY nbconfig /notebooks/.jupyter/
 ENV HOME /notebooks
