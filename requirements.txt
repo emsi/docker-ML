@@ -12,7 +12,7 @@ fiona
 flake8
 folium
 gensim
-h5py
+h5py==3.1.0
 imbalanced-learn
 ipython
 ipython-genutils
@@ -33,10 +33,10 @@ nbformat
 nltk
 notebook
 numexpr
-numpy
+numpy==1.19.2
 openpyxl
 opt-einsum
-pandas
+pandas==1.2.5
 pandocfilters
 pexpect
 pickleshare
@@ -62,7 +62,7 @@ scikit-learn
 scipy
 seaborn
 setuptools
-six
+six==1.15.0
 smart-open
 statsmodels
 swifter
@@ -77,12 +77,12 @@ torchvision
 tornado
 tqdm
 traitlets
-typing-extensions
+typing-extensions==3.7.4
 urllib3
 webencodings
 widgetsnbextension
 wrapt
-xgboost
+xgboost==1.2.0
 xlrd
 yapf
 zipp
