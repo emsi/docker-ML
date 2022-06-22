@@ -33,7 +33,7 @@ nbformat
 nltk
 notebook
 numexpr
-numpy==1.19.2
+numpy==1.22.0
 openpyxl
 opt-einsum
 pandas==1.2.5
