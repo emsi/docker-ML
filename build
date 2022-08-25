@@ -1,21 +1,21 @@
 #!/bin/bash
-export PY_VERSION="3.9"
+export PY_VERSION="3.10"
+export TF_VERSION="2.9"
+docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 
+export PY_VERSION="3.9.12"
 export TF_VERSION="2.7.0"
 docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 
 export PY_VERSION="3.9"
-
 export TF_VERSION="2.6.0"
 docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 
 export PY_VERSION="3.8"
-
 export TF_VERSION="2.5.0"
 docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 
 export PY_VERSION="3.7"
-
 export TF_VERSION="2.5.0"
 docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 

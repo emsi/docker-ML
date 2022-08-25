@@ -89,3 +89,6 @@ xgboost
 xlrd
 yapf
 zipp
+
+git+https://github.com/keras-team/keras-tuner.git
+autokeras
