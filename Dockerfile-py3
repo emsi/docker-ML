@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY requirements.txt /requirements.txt
 RUN pip3 --no-cache-dir install tensorflow==${TF_VERSION} -r requirements.txt
+RUN pip3 freeze > requirements.txt
 
 # Installing nodejs with npm
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash && \
@@ -33,7 +34,8 @@ RUN jupyter labextension install @jupyterlab/toc \
 	@aquirdturtle/collapsible_headings \
 	@ryantam626/jupyterlab_code_formatter \
 	@jupyter-widgets/jupyterlab-manager \
-	@krassowski/jupyterlab-lsp && \
+	@krassowski/jupyterlab-lsp \
+		&& \
 	jupyter serverextension enable --py jupyterlab_code_formatter 
 
 
