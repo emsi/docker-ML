@@ -1,1 +1,66 @@
-Dockerfile-py3
+ARG PY_VERSION
+FROM python:${PY_VERSION}
+
+ARG TF_VERSION
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	git \
+	wget \
+	vim \
+	inetutils-ping \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /requirements.txt
+RUN pip3 --no-cache-dir install tensorflow==${TF_VERSION} -r requirements.txt
+RUN pip3 freeze > requirements.txt
+
+# Installing nodejs with npm
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash && \
+	apt-get install -y nodejs && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
+
+#RUN apt-get update && apt-get install -y npm && \
+#     apt-get clean && \
+#    rm -rf /var/lib/apt/lists/*
+
+# RUN jupyter contrib nbextension install --user --skip-running-check && jupyter nbextensions_configurator enable --user 
+
+#RUN jupyter labextension install @krassowski/jupyterlab_go_to_definition @ryantam626/jupyterlab_code_formatter && \
+#	 pip install jupyterlab_code_formatter && jupyter serverextension enable --py jupyterlab_code_formatter
+
+RUN jupyter labextension install @jupyterlab/toc \
+	@aquirdturtle/collapsible_headings \
+	@ryantam626/jupyterlab_code_formatter \
+	@jupyter-widgets/jupyterlab-manager \
+	@krassowski/jupyterlab-lsp \
+		&& \
+	jupyter serverextension enable --py jupyterlab_code_formatter 
+
+
+#RUN jupyter lab build
+
+# add CUDA toolkit
+RUN curl -sL https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda_11.4.0_470.42.01_linux.run -o cuda_linux.run
+RUN sh ./cuda_linux.run --silent --toolkit && rm ./cuda_linux.run
+
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/libcudnn8_8.2.2.26-1+cuda11.4_amd64.deb
+RUN dpkg -i ./libcudnn8_8.2.2.26-1+cuda11.4_amd64.deb && rm libcudnn8_8.2.2.26-1+cuda11.4_amd64.deb
+
+ENV PATH="${PATH}:/usr/local/cuda/bin"
+
+RUN mkdir -p /notebooks/
+COPY nbconfig /notebooks/.jupyter/
+ENV HOME /notebooks
+WORKDIR /notebooks
+
+# Set shell to bash
+ENV SHELL /bin/bash
+
+# Set locale
+ENV LANG "C.UTF-8"
+ENV LC_COLLATE "C.UTF-8"
+
+
+#CMD ["/run_jupyter.sh"]

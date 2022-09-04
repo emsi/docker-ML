@@ -1,1 +1,41 @@
-Dockerfile-py3-conda
+FROM tensorflow/tensorflow:1.12.0-gpu-py3 
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	git \
+	wget \
+	vim \
+	inetutils-ping \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install miniconda
+RUN wget --no-check-certificate https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+	bash ./Miniconda3-latest-Linux-x86_64.sh -b -p /anaconda3 && \
+	rm -f ./Miniconda3-latest-Linux-x86_64.sh
+
+ENV PATH /anaconda3/bin:$PATH
+RUN conda upgrade conda && \
+	conda upgrade --all && \
+	conda upgrade conda  && \
+	conda install nb_conda jupyter notebook
+
+# numpy jupyter notebook
+# Create py3 TF environment s
+RUN conda install -c numpy matplotlib scikit-learn nltk openpyxl seaborn pandas gensim Keras h5py Keras regex tensorflow-gpu jupyter tensorboard
+RUN conda install -c pytorch pytorch-nightly cuda92
+RUN conda install -c fastai torchvision-nightly
+RUN conda install -c fastai fastai
+
+RUN mkdir -p /notebooks/TF-examples && \
+	mv /notebooks/*.ipynb /notebooks/TF-examples 
+RUN mkdir -p /notebooks/Keras-examples
+#COPY Keras-examples/examples /notebooks/Keras-examples
+COPY nbconfig /root/.jupyter/
+
+# Set shell to bash
+ENV SHELL /bin/bash
+
+# Set locale
+ENV LANG "C.UTF-8"
+ENV LC_COLLATE "C.UTF-8"
