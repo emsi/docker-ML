@@ -1,7 +1,5 @@
 #!/bin/bash 
 
-export TF_VERSION="1.14.0-gpu-py3"
-
 docker run --runtime=nvidia --rm \
         -p8888:8888 \
 	-e HOME=${HOME} \
