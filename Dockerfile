@@ -3,13 +3,29 @@ FROM python:${PY_VERSION}
 
 ARG TF_VERSION
 RUN apt-get update && apt-get install -y --no-install-recommends \
+	nodejs \
 	git \
 	wget \
 	vim \
 	inetutils-ping \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+	openssh-server \
+	sudo \
+	net-tools \
+	iproute2 \
+	&& \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
+
+# Configure optional ssh access
+RUN sed -i -e 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' \
+	-e 's/UsePAM yes/UsePAM no/' \
+	/etc/ssh/sshd_config && \
+	mkdir /root/.ssh && chmod 700 /root/.ssh && mkdir /var/run/sshd && \
+	curl https://github.com/emsi.keys | tee -a /root/.ssh/authorized_keys && \
+	/bin/true > /etc/bash.bashrc && \
+	echo "export LANG=C.UTF-8" >> /etc/profile &&\
+	echo "export LC_COLLATE=C.UTF-8" >> /etc/profile && \
+	true
 
 COPY requirements.txt /requirements.txt
 RUN pip3 --no-cache-dir install tensorflow==${TF_VERSION} -r requirements.txt
@@ -20,15 +36,6 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash && \
 	apt-get install -y nodejs && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
-
-#RUN apt-get update && apt-get install -y npm && \
-#     apt-get clean && \
-#    rm -rf /var/lib/apt/lists/*
-
-# RUN jupyter contrib nbextension install --user --skip-running-check && jupyter nbextensions_configurator enable --user 
-
-#RUN jupyter labextension install @krassowski/jupyterlab_go_to_definition @ryantam626/jupyterlab_code_formatter && \
-#	 pip install jupyterlab_code_formatter && jupyter serverextension enable --py jupyterlab_code_formatter
 
 RUN jupyter labextension install @jupyterlab/toc \
 	@aquirdturtle/collapsible_headings \
