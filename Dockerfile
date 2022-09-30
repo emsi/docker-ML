@@ -4,6 +4,7 @@ FROM python:${PY_VERSION}
 ARG TF_VERSION
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	nodejs \
+	libgl1 \
 	git \
 	wget \
 	vim \
