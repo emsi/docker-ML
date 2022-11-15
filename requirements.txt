@@ -4,6 +4,8 @@ Pillow
 PyYAML
 Pygments
 Werkzeug
+aiofile
+aiohttp
 autopep8
 black
 bokeh
@@ -19,6 +21,7 @@ ipython
 ipython-genutils
 ipywidgets
 isort
+git+https://github.com/emsi/javalang@end_position
 joblib
 jupyter-lsp
 jupyter-nbextensions-configurator
