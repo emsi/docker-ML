@@ -13,35 +13,14 @@ services:
     # jupyter
       - "8888"
     environment:
-      - VIRTUAL_HOST=${COMPOSE_PROJECT_NAME}_dl
-      - VIRTUAL_PORT=8888
       - NVIDIA_VISIBLE_DEVICES=all
-    entrypoint: jupyter-lab --ip=0.0.0.0 --allow-root
+      - HOME=${HOME}
+    user: ${COMPOSE_USER_ID}:${COMPOSE_GROUP_ID}
+    working_dir: ${HOME}
+    entrypoint: jupyter-lab --ip=0.0.0.0
     volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
       - /etc/localtime:/etc/localtime:ro
-      - ${HOME}:/notebooks/
+      - ${HOME}:${HOME}
     init: true
-    #  dl-devel:
-    #    depends_on: 
-    #      - dl
-    #    image: emsi/deep-learning-devel:${TF_VERSION}-py${PY_VERSION}
-    #    build: 
-    #      context: .
-    #      dockerfile: Dockerfile-devel
-    #    expose:
-    #      - "22"
-    #      - "8888"
-    #    # ssh
-    #    ports:
-    #      - "3322:22"
-    #        #    - target: 22
-    #        #      published: 3322
-    #        #      protocol: tcp
-    #        #      mode: host
-    #    volumes:
-    #      - /etc/localtime:/etc/localtime:ro
-    #      - ${HOME}:/notebooks/
-    #      - ${HOME}:${HOME}
-    #      - /etc/passwd:/etc/passwd:ro
-    #      - /etc/group:/etc/group:ro
-    #    init: true
