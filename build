@@ -1,9 +1,17 @@
 #!/bin/bash
+set -Eeuo pipefail
+
+if [ `which dokcer-compose` ]; then
+	compose='docker-compose'
+else
+	compose='docker compose'
+fi
+
 export DOCKER_BUILDKIT=0
 
 export PY_VERSION="3.10"
 export TF_VERSION="2.10"
-docker-compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
+$compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg PY_VERSION=${PY_VERSION}
 
 #export PY_VERSION="3.10"
 #export TF_VERSION="2.9"
