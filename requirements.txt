@@ -31,6 +31,7 @@ jupyterlab
 jupyterlab_code_formatter
 jupytext
 many_stop_words
+mlflow[extras]
 mccabe
 nbconvert
 nbformat
