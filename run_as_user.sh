@@ -4,6 +4,8 @@ set -Eeuo pipefail
 
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
+echo "$(cd "${script_dir}"; git pull)" >> /dev/null
+
 cat > "${script_dir}/.env" << EOF
 PY_VERSION="3.10"
 TF_VERSION="2.10"
