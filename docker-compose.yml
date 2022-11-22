@@ -17,7 +17,7 @@ services:
       - HOME=${HOME}
     user: ${COMPOSE_USER_ID}:${COMPOSE_GROUP_ID}
     working_dir: ${HOME}
-    entrypoint: jupyter-lab --ip=0.0.0.0
+    command: jupyter-lab --ip=0.0.0.0
     volumes:
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
@@ -35,7 +35,7 @@ services:
       - ./sudoers.sh:/sudoers.sh
       - sudoers:/etc/sudoers.d/:rw
 
-    entrypoint: /sudoers.sh
+    command: /sudoers.sh
 
 volumes:
   sudoers:
