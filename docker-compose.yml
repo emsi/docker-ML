@@ -21,6 +21,7 @@ services:
     volumes:
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
+      - /etc/group:/etc/group:ro
       - sudoers:/etc/sudoers.d/:ro
       - /etc/localtime:/etc/localtime:ro
       - ${HOME}:${HOME}
