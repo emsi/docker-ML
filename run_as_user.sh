@@ -34,7 +34,7 @@ EOF
 chmod +x sudoers.sh
 
 
-if [ `which docker-compose` ]; then
+if [ "$(which docker-compose)" ]; then
 	compose='docker-compose'
 else
 	compose='docker compose'
