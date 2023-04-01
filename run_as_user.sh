@@ -4,12 +4,12 @@ set -Eeuo pipefail
 
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
-# source existing env values
-. "${script_dir}"/.env
-
 # set default values
 PY_VERSION="${PY_VERSION:-"3.10"}"
 TF_VERSION="${TF_VERSION:-"2.10"}"
+
+# source existing env values
+. "${script_dir}"/.env 2>/dev/null || true
 
 # refresh repo
 echo "$(cd "${script_dir}"; git pull)" >> /dev/null
