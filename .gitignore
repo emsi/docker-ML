@@ -1,5 +1,7 @@
 *~
 
+sudoers.sh
+
 # local compose override file
 docker-compose.override.yml
 
