@@ -1,0 +1,12 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+if [ "$(which docker-compose)" ]; then
+	compose='docker-compose'
+else
+	compose='docker compose'
+fi
+
+export CUDA_VERSION="11.7.1-cudnn8-runtime-ubuntu22.04"
+export TF_VERSION="2.10"
+$compose build --build-arg TF_VERSION=${TF_VERSION}  --build-arg CUDA_VERSION=${CUDA_VERSION}
