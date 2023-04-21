@@ -25,6 +25,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - home:/home/
       - ${HOME}/git:${HOME}/git
+      - ${HOME}/.ssh/authorized_keys:${HOME}/.ssh/authorized_keys:ro
     init: true
     restart: always
     depends_on:

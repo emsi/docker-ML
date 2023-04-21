@@ -31,7 +31,7 @@ cat > "${script_dir}/sudoers.sh" << EOF
 echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sudoers
 chown 0:0 /etc/sudoers.d/sudoers
 
-mkdir -p "${HOME}"
+mkdir -p "${HOME}/.ssh"
 chown -R $(id -u):$(id -g) "${HOME}"
 EOF
 chmod +x sudoers.sh
