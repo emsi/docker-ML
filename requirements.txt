@@ -7,7 +7,7 @@ Werkzeug
 aiofile
 aiohttp
 autopep8
-black
+black[jupyter]
 bokeh
 branca
 environs
@@ -83,7 +83,7 @@ torchvision
 tornado
 tqdm
 traitlets
-transformers
+git+https://github.com/huggingface/transformers
 typing-extensions
 urllib3
 webencodings
@@ -96,3 +96,9 @@ zipp
 
 git+https://github.com/keras-team/keras-tuner.git
 autokeras
+loralib
+sentencepiece
+git+https://github.com/huggingface/peft.git
+bitsandbytes
+openai
+tenacity
