@@ -31,6 +31,12 @@ RUN mkdir -p /notebooks/
 ENV HOME /notebooks
 WORKDIR /notebooks
 
+# add ~/.local/bin to path for locally installed stuff
+RUN echo 'export PATH="${HOME}/.local/bin:${PATH}"'> /etc/profile.d/99-local-path.sh 
+
+# enable sshd
+RUN mkdir /var/run/sshd
+
 # Set shell to bash
 ENV SHELL /bin/bash
 
