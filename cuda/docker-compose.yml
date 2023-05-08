@@ -26,6 +26,7 @@ services:
       - home:/home/
       - ${HOME}/git:${HOME}/git
       - ${HOME}/.ssh/authorized_keys:${HOME}/.ssh/authorized_keys:ro
+      - ${HOME}/.cache/huggingface/:${HOME}/.cache/huggingface/
     init: true
     restart: always
     depends_on:
