@@ -14,7 +14,7 @@ bokeh
 branca
 einops
 environs
-faiss
+faiss-cpu
 fiona
 flake8
 folium
