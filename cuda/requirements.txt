@@ -95,7 +95,7 @@ urllib3
 webencodings
 widgetsnbextension
 wrapt
-xformers
+#xformers
 xgboost
 xlrd
 yapf
