@@ -45,4 +45,6 @@ fi
 
 $compose up -d
 
+$compose exec --user 0  -d dl nohup /usr/sbin/sshd
+
 $compose logs -f
