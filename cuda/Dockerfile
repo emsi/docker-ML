@@ -14,11 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	sudo \
 	net-tools \
 	iproute2 \
-    python3-venv \
-    python3-pip \
-    python3-jupyterlab-server \
-    build-essential \
-    python3-dev \
+	python3-venv \
+	python3-pip \
+	python3-jupyterlab-server \
+	build-essential \
+	python3-dev \
+	universal-ctags \
 	&& \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
