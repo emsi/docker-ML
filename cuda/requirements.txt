@@ -34,6 +34,7 @@ isort
 joblib
 langchain
 loralib
+lxml
 many_stop_words
 mccabe
 mlflow[extras]
