@@ -32,6 +32,7 @@ ipython-genutils
 ipywidgets
 isort
 joblib
+jupytext
 langchain
 loralib
 lxml
@@ -104,5 +105,3 @@ xgboost
 xlrd
 yapf
 zipp
-
-typer
