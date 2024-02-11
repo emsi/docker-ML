@@ -5,8 +5,7 @@ set -Eeuo pipefail
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
 # set default values
-PY_VERSION="${PY_VERSION:-"3.10"}"
-TF_VERSION="${TF_VERSION:-"2.10"}"
+PY_VERSION="${PY_VERSION:-"3.11"}"
 
 # source existing env values
 . "${script_dir}"/.env 2>/dev/null || true
@@ -17,7 +16,6 @@ echo "$(cd "${script_dir}"; git pull)" >> /dev/null
 # set variables for  uid/gid and prefix project name with username
 cat > "${script_dir}/.env" << EOF
 PY_VERSION="${PY_VERSION}"
-TF_VERSION="${TF_VERSION}"
 
 COMPOSE_USER_ID=$(id -u)
 COMPOSE_GROUP_ID=$(id -g)
@@ -30,6 +28,9 @@ cat > "${script_dir}/sudoers.sh" << EOF
 
 echo "$(whoami) ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sudoers
 chown 0:0 /etc/sudoers.d/sudoers
+
+mkdir -p "${HOME}/.ssh"
+chown -R $(id -u):$(id -g) "${HOME}"
 EOF
 chmod +x sudoers.sh
 
@@ -41,5 +42,7 @@ else
 fi
 
 $compose up -d
+
+$compose exec --user 0  -d dl nohup /usr/sbin/sshd
 
 $compose logs -f

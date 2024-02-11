@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -Eeuo pipefail
 
 if [ "$(which docker-compose)" ]; then
@@ -7,8 +8,5 @@ else
 	compose='docker compose'
 fi
 
-export DOCKER_BUILDKIT=0
-
-export PY_VERSION="3.11"
-
-$compose build --build-arg PY_VERSION=${PY_VERSION}
+$compose exec --user 0  -d dl mkdir -p /run/sshd
+$compose exec --user 0  -d dl nohup /usr/sbin/sshd

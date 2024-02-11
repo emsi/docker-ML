@@ -1,9 +1,7 @@
-version: '2.4'
-
 services:
   dl:
     runtime: nvidia
-    image: emsi/deep-learning:${TF_VERSION}-py${PY_VERSION}
+    image: emsi/deep-learning:py${PY_VERSION}
     build: 
       context: .
       dockerfile: Dockerfile
@@ -17,7 +15,7 @@ services:
       - HOME=${HOME}
     user: ${COMPOSE_USER_ID}:${COMPOSE_GROUP_ID}
     working_dir: ${HOME}
-    command: jupyter-lab --ip=0.0.0.0
+
     volumes:
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
@@ -34,7 +32,7 @@ services:
       - sudo
 
   sudo:
-    image: emsi/deep-learning:${TF_VERSION}-py${PY_VERSION}
+    image: emsi/deep-learning:py${PY_VERSION}
     volumes:
       - ./sudoers.sh:/sudoers.sh
       - sudoers:/etc/sudoers.d/:rw
@@ -44,3 +42,4 @@ services:
 
 volumes:
   sudoers:
+  home:
