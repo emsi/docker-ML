@@ -24,7 +24,10 @@ services:
       - /etc/group:/etc/group:ro
       - sudoers:/etc/sudoers.d/:ro
       - /etc/localtime:/etc/localtime:ro
-      - ${HOME}:${HOME}
+      - home:/home/
+      - ${HOME}/git:${HOME}/git
+      - ${HOME}/.ssh/authorized_keys:${HOME}/.ssh/authorized_keys:ro
+      - ${HOME}/.cache/huggingface/:${HOME}/.cache/huggingface/
     init: true
     restart: always
     depends_on:
@@ -35,6 +38,7 @@ services:
     volumes:
       - ./sudoers.sh:/sudoers.sh
       - sudoers:/etc/sudoers.d/:rw
+      - home:/home/
 
     command: /sudoers.sh
 

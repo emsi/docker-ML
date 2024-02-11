@@ -2,6 +2,7 @@ ARG PY_VERSION
 FROM python:${PY_VERSION}
 
 ARG TF_VERSION
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	nodejs \
 	libgl1 \
@@ -13,6 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	sudo \
 	net-tools \
 	iproute2 \
+	python3-venv \
+	python3-pip \
+	python3-jupyterlab-server \
+	build-essential \
+	python3-dev \
+	universal-ctags \
 	&& \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
