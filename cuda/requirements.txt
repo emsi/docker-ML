@@ -104,3 +104,5 @@ xgboost
 xlrd
 yapf
 zipp
+
+typer
