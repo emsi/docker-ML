@@ -8,10 +8,11 @@ aiofile
 aiohttp
 autokeras
 autopep8
-bitsandbytes
 black[jupyter]
 bokeh
 branca
+clang
+datasets
 einops
 environs
 faiss-cpu
@@ -23,6 +24,7 @@ git+https://github.com/emsi/javalang@end_position
 git+https://github.com/huggingface/peft.git
 git+https://github.com/huggingface/transformers
 git+https://github.com/keras-team/keras-tuner.git
+git+https://github.com/TimDettmers/bitsandbytes
 h5py
 imbalanced-learn
 ipython
@@ -30,15 +32,10 @@ ipython-genutils
 ipywidgets
 isort
 joblib
-jupyter-lsp
-jupyter-nbextensions-configurator
-jupyter_contrib_nbextensions
-jupyter_nbextensions_configurator
-jupyterlab
-jupyterlab_code_formatter
 jupytext
 langchain
 loralib
+lxml
 many_stop_words
 mccabe
 mlflow[extras]
@@ -97,6 +94,7 @@ tornado
 tqdm
 traitlets
 triton
+typer
 typing-extensions
 urllib3
 webencodings
