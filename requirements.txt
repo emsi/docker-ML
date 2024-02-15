@@ -12,6 +12,7 @@ aiohttp
 autokeras
 autopep8
 beautifulsoup4
+bitsandbytes @ git+https://github.com/TimDettmers/bitsandbytes
 black[jupyter]
 bokeh
 branca
@@ -24,19 +25,16 @@ fiona
 flake8
 folium
 gensim
-git+https://github.com/TimDettmers/bitsandbytes
-git+https://github.com/emsi/javalang@end_position
-git+https://github.com/huggingface/peft.git
-git+https://github.com/huggingface/transformers
-git+https://github.com/keras-team/keras-tuner.git
 h5py
 imbalanced-learn
 ipython
 ipython-genutils
 ipywidgets
 isort
+javalang @  git+https://github.com/emsi/javalang@end_position
 joblib
 jupytext
+keras-tuner @  git+https://github.com/keras-team/keras-tuner.git
 langchain
 langchain-openai
 libclang
@@ -60,6 +58,7 @@ openpyxl
 opt-einsum
 pandas
 pandocfilters
+peft @  git+https://github.com/huggingface/peft.git
 pexpect
 pickleshare
 prompt-toolkit
@@ -106,7 +105,7 @@ torchvision
 tornado
 tqdm
 traitlets
-transformers
+transformers @  git+https://github.com/huggingface/transformers
 triton
 typer
 typing-extensions
